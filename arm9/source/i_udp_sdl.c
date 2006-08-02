@@ -31,7 +31,7 @@
  *
  *-----------------------------------------------------------------------------*/
 
-#include "config.h"
+# include "config.h"
 #ifdef HAVE_NETINET_IN_H
 # include <netinet/in.h>
 #endif
@@ -46,7 +46,7 @@
 
 #ifdef HAVE_NET
 
-// #include "SDL.h"
+#include "SDL.h"
 #include "SDL_net.h"
 
 #include "protocol.h"
@@ -121,19 +121,11 @@ IPaddress serverIP;
 
 int I_ConnectToServer(const char *serv)
 {
-//  char server[500], *p;
-  //u16 port;
-  
-  iprintf("enter\n");
+  char server[500], *p;
+  Uint16 port;
 
   /* Split serv into address and port */
-/*  if (strlen(serv)>500)
-  {
-  iprintf("ARGH!\n");
-  return 0;
-  }*/
-  
-  /*
+  if (strlen(serv)>500) return 0;
   strcpy(server,serv);
   p = strchr(server, ':');
   if(p)
@@ -142,14 +134,7 @@ int I_ConnectToServer(const char *serv)
     port = atoi(p);
   }
   else
-    port = 5030; // Default server port*/
-	
-iprintf("come on damnit work what the hell\n");
-
-	char *server = "128.39.147.76";
-	u16 port = 5030;
-
-iprintf("server: %s port: %d\n", server, port);
+    port = 5030; /* Default server port */
 
   SDLNet_ResolveHost(&serverIP, server, port);
   if ( serverIP.host == INADDR_NONE )
@@ -189,7 +174,7 @@ void I_Disconnect(void)
  * Sets the given socket non-blocking, binds to the given port, or first
  * available if none is given
  */
-UDP_SOCKET I_Socket(u16 port)
+UDP_SOCKET I_Socket(Uint16 port)
 {
   if(port)
     return (SDLNet_UDP_Open(port));
@@ -284,7 +269,7 @@ void I_PrintAddress(FILE* fp, UDP_CHANNEL *addr)
 {
 /*
   char *addy;
-  u16 port;
+  Uint16 port;
   IPaddress *address;
 
   address = SDLNet_UDP_GetPeerAddress(udp_socket, player);

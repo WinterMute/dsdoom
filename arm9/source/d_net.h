@@ -33,8 +33,6 @@
 #ifndef __D_NET__
 #define __D_NET__
 
-#include "config.h"
-
 #include "d_player.h"
 
 
